@@ -17,6 +17,7 @@ def main():
             for item in weather_data["weather"]:
                 # First figure out the hourly weather
                 emojis = []
+                pressures = []
                 for hr in item["hourly"]:
                     hour = int(hr["time"]) // 100
                     start = item["date"] + "T" + f"{hour:0>2}:00:00"
@@ -29,6 +30,7 @@ def main():
                     end = item["date"] + "T" + f"{hour:0>2}:{minute:0>2}:00"
                     temp = hr["tempC"]
                     pressure = hr["pressure"]
+                    pressures.append(int(pressure)
                     desc: str = WWO_CODE[hr["weatherCode"]]
                     emoji = WEATHER_SYMBOL.get(desc, "")
                     emojis.append(emoji)
@@ -61,10 +63,15 @@ def main():
                 temp = item["avgtempC"]
                 sunset = item["astronomy"][0]["sunset"]
                 emojis = "".join(emojis[2:-2])
+                min_hPa = min(pressures)
+                max_hPa = max(pressures)
+                mean_hPa = sum(pressures) / len(pressures)
+                delta_hPa = max_hPa - min_hPa
+
                 daily.append(
                     {
-                        "title": f"{emojis} {item['mintempC']}-{item['maxtempC']}°C",
-                        "description": f"Sunset at {sunset}",
+                        "title": f"{emojis} {temp}°C {min_hPa}-{max_hPa}hPa",
+                        "description": f"Sunset at {sunset}\n{item['mintempC']}-{item['maxtempC']}°C",
                         "start": item["date"] + "+02:00",
                         "end": item["date"] + "+02:00",
                     }
