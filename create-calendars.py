@@ -50,12 +50,12 @@ def main():
     # Write the events list as yaml files into the calendars directory
     daily_name = "cape-town-daily"
     print(f"Writing events to `calendars/{daily_name}.yaml`:\n{daily}")
-    with open("calendars/{fname}.yaml", "w") as file:
+    with open(f"calendars/{fname}.yaml", "w") as file:
         yaml.dump({"events": daily}, file)
     # Write the events list as yaml files into the calendars directory
     hourly_name = "cape-town-hourly"
     print(f"Writing events to `calendars/{hourly_name}.yaml`:\n{hourly}")
-    with open("calendars/{fname}.yaml", "w") as file:
+    with open(f"calendars/{fname}.yaml", "w") as file:
         yaml.dump({"events": hourly}, file)
 
     print(f"Python script finished")
