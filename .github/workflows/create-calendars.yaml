@@ -1,5 +1,5 @@
 # The name of this workflow
-name: My Cool Calendar Creator
+name: Create weather calendars
 
 # When a push is received to branch `main` that changes `create-calendars.py`,
 # run the workflow. Also allow the workflow to be run manually.
@@ -9,6 +9,8 @@ on:
     paths:
       - 'create-calendars.py'
   workflow_dispatch:
+
+permissions: write-all
 
 jobs:
   create-calendars:
