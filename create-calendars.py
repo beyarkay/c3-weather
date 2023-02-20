@@ -30,7 +30,7 @@ def main():
                     end = item["date"] + "T" + f"{hour:0>2}:{minute:0>2}:00"
                     temp = hr["tempC"]
                     pressure = hr["pressure"]
-                    pressures.append(int(pressure)
+                    pressures.append(int(pressure))
                     desc: str = WWO_CODE[hr["weatherCode"]]
                     emoji = WEATHER_SYMBOL.get(desc, "")
                     emojis.append(emoji)
