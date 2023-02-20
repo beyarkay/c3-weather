@@ -38,7 +38,7 @@ def main():
                         .capitalize()
                     )
                     lines = [
-                        f"Feels Like: {hr['FeelsLikeC']}",
+                        f"Feels Like: {hr['FeelsLikeC']}°C",
                         f"Wind Speed: {hr['windspeedKmph']}km/h",
                         f"Wind Direction: {hr['winddir16Point']}",
                         f"Wind Gust: {hr['WindGustKmph']}km/h",
@@ -60,7 +60,7 @@ def main():
                     )
                 temp = item["avgtempC"]
                 sunset = item["astronomy"][0]["sunset"]
-                emojis = "".join(emojis)
+                emojis = "".join(emojis[2:-2])
                 daily.append(
                     {
                         "title": f"{emojis} {item['mintempC']}-{item['maxtempC']}°C",
