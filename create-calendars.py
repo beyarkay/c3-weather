@@ -5,7 +5,8 @@ from pprint import pprint
 
 
 def main():
-    events = []
+    daily = []
+    hourly = []
 
     res = requests.get("http://wttr.in/Cape%20Town?format=j1")
     if res.ok:
@@ -15,7 +16,7 @@ def main():
             for item in weather_data["weather"]:
                 temp = item["avgtempC"]
                 sunset = item["astronomy"][0]["sunset"]
-                events.append(
+                daily.append(
                     {
                         "title": f"{temp}°C",
                         "description": f"Sunset at {sunset}",
@@ -23,6 +24,20 @@ def main():
                         "end": item["date"],
                     }
                 )
+                for hr in item["hourly"]:
+                    hour = int(hr["time"]) // 100
+                    start = item["date"] + "T" + f"{hour:0>2}:00:00"
+                    end = item["date"] + "T" + f"{hour+3:0>2}:00:00"
+                    temp = hr["tempC"]
+                    pressure = hr["pressure"]
+                    hourly.append(
+                        {
+                            "title": f"{temp}°C, {pressure}hPa",
+                            "description": f"no description",
+                            "start": start,
+                            "end": end,
+                        }
+                    )
         except Exception as e:
             print(f"Failed to get weather events: {e}")
     else:
@@ -33,9 +48,15 @@ def main():
     os.makedirs("calendars", exist_ok=True)
 
     # Write the events list as yaml files into the calendars directory
-    print(f"Writing events to `calendars/simple-calendar.yaml`:\n{events}")
-    with open("calendars/simple-calendar.yaml", "w") as file:
-        yaml.dump({"events": events}, file)
+    daily_name = "cape-town-daily"
+    print(f"Writing events to `calendars/{daily_name}.yaml`:\n{daily}")
+    with open("calendars/{fname}.yaml", "w") as file:
+        yaml.dump({"events": daily}, file)
+    # Write the events list as yaml files into the calendars directory
+    hourly_name = "cape-town-hourly"
+    print(f"Writing events to `calendars/{hourly_name}.yaml`:\n{hourly}")
+    with open("calendars/{fname}.yaml", "w") as file:
+        yaml.dump({"events": hourly}, file)
 
     print(f"Python script finished")
 
