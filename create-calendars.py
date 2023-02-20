@@ -31,6 +31,7 @@ def main():
                         hour = 23
                         minute = 59
                     else:
+                        hour = hour + 3
                         minute = 0
                     end = item["date"] + "T" + f"{hour:0>2}:{minute:0>2}:00"
                     temp = hr["tempC"]
@@ -54,12 +55,14 @@ def main():
 
     # Write the events list as yaml files into the calendars directory
     daily_name = "cape-town-daily"
-    print(f"Writing events to `calendars/{daily_name}.yaml`:\n{daily}")
+    print(f"Writing events to `calendars/{daily_name}.yaml`")
+    pprint(daily)
     with open(f"calendars/{daily_name}.yaml", "w") as file:
         yaml.dump({"events": daily}, file)
     # Write the events list as yaml files into the calendars directory
     hourly_name = "cape-town-hourly"
-    print(f"Writing events to `calendars/{hourly_name}.yaml`:\n{hourly}")
+    print(f"Writing events to `calendars/{hourly_name}.yaml`")
+    pprint(hourly)
     with open(f"calendars/{hourly_name}.yaml", "w") as file:
         yaml.dump({"events": hourly}, file)
 
