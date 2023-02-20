@@ -9,6 +9,8 @@ on:
     paths:
       - 'create-calendars.py'
   workflow_dispatch:
+  schedule:
+    - cron: '0 */3 * * *'
 
 permissions:
   actions: write
