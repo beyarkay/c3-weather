@@ -67,11 +67,17 @@ def main():
                 max_hPa = max(pressures)
                 mean_hPa = sum(pressures) / len(pressures)
                 delta_hPa = max_hPa - min_hPa
+                lines = [
+                    f"Sunset at {sunset}",
+                    f"Temperature range: {item['mintempC']}-{item['maxtempC']}°C",
+                    f"Pressure range: {min_hPa}-{max_hPa}hPa ({delta_hPa})",
+                    f"Mean pressure: {mean_hPa}",
+                ]
 
                 daily.append(
                     {
                         "title": f"{emojis} {temp}°C {min_hPa}-{max_hPa}hPa",
-                        "description": f"Sunset at {sunset}\n{item['mintempC']}-{item['maxtempC']}°C",
+                        "description": "\n".join(lines),
                         "start": item["date"] + "+02:00",
                         "end": item["date"] + "+02:00",
                     }
