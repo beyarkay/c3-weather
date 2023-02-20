@@ -54,19 +54,19 @@ def main():
                         {
                             "title": f"{emoji} {desc} {temp}°C {pressure}hPa",
                             "description": "\n".join(lines),
-                            "start": start,
-                            "end": end,
+                            "start": start + "+02:00",
+                            "end": end + "+02:00",
                         }
                     )
                 temp = item["avgtempC"]
                 sunset = item["astronomy"][0]["sunset"]
-                emojis = " ".join(emojis)
+                emojis = "".join(emojis)
                 daily.append(
                     {
                         "title": f"{emojis} {item['mintempC']}-{item['maxtempC']}°C",
                         "description": f"Sunset at {sunset}",
-                        "start": item["date"],
-                        "end": item["date"],
+                        "start": item["date"] + "+02:00",
+                        "end": item["date"] + "+02:00",
                     }
                 )
         except Exception as e:
