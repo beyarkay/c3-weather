@@ -27,7 +27,12 @@ def main():
                 for hr in item["hourly"]:
                     hour = int(hr["time"]) // 100
                     start = item["date"] + "T" + f"{hour:0>2}:00:00"
-                    end = item["date"] + "T" + f"{hour+3:0>2}:00:00"
+                    if hour + 3 == 24:
+                        hour = 23
+                        minute = 59
+                    else:
+                        minute = 0
+                    end = item["date"] + "T" + f"{hour:0>2}:{minute:0>2}:00"
                     temp = hr["tempC"]
                     pressure = hr["pressure"]
                     hourly.append(
