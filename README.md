@@ -1,6 +1,8 @@
-# Custom Calendar Creator demo project
+# C3-weather
 
-See [the main repo](https://github.com/beyarkay/c3) for details
+Built using [c3](https://github.com/beyarkay/c3).
+
+Weather in your calendar
 
 ## YAML calendar format
 
