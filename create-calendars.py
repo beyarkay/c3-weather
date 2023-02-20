@@ -15,16 +15,8 @@ def main():
             weather_data = res.json()
             pprint(weather_data.keys())
             for item in weather_data["weather"]:
-                temp = item["avgtempC"]
-                sunset = item["astronomy"][0]["sunset"]
-                daily.append(
-                    {
-                        "title": f"{temp}°C",
-                        "description": f"Sunset at {sunset}",
-                        "start": item["date"],
-                        "end": item["date"],
-                    }
-                )
+                # First figure out the hourly weather
+                emojis = []
                 for hr in item["hourly"]:
                     hour = int(hr["time"]) // 100
                     start = item["date"] + "T" + f"{hour:0>2}:00:00"
@@ -39,6 +31,7 @@ def main():
                     pressure = hr["pressure"]
                     desc: str = WWO_CODE[hr["weatherCode"]]
                     emoji = WEATHER_SYMBOL.get(desc, "")
+                    emojis.append(emoji)
                     desc = (
                         "".join([(c if c.islower() else " " + c.lower()) for c in desc])
                         .strip()
@@ -65,6 +58,17 @@ def main():
                             "end": end,
                         }
                     )
+                temp = item["avgtempC"]
+                sunset = item["astronomy"][0]["sunset"]
+                emojis = " ".join(emojis)
+                daily.append(
+                    {
+                        "title": f"{emojis} {item['mintempC']}-{item['maxtempC']}°C",
+                        "description": f"Sunset at {sunset}",
+                        "start": item["date"],
+                        "end": item["date"],
+                    }
+                )
         except Exception as e:
             print(f"Failed to get weather events: {e}")
     else:
