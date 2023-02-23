@@ -70,7 +70,7 @@ def main():
                 lines = [
                     f"Sunset at {sunset}",
                     f"Temperature range: {item['mintempC']}-{item['maxtempC']}°C",
-                    f"Pressure range: {min_hPa}-{max_hPa}hPa ({delta_hPa})",
+                    f"Pressure range: {min_hPa}-{max_hPa}hPa ({delta_hPa}hPa)",
                     f"Mean pressure: {mean_hPa}",
                 ]
 
@@ -78,8 +78,8 @@ def main():
                     {
                         "title": f"{emojis} {temp}°C {min_hPa}-{max_hPa}hPa",
                         "description": "\n".join(lines),
-                        "start": item["date"] + "+02:00",
-                        "end": item["date"] + "+02:00",
+                        "start": item["date"],
+                        "end": item["date"],
                     }
                 )
         except Exception as e:
