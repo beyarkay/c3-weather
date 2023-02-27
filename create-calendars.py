@@ -84,26 +84,26 @@ def main():
                 )
         except Exception as e:
             print(f"Failed to get weather events: {e}")
+
+        # Create a directory to contain our calendars
+        print("Creating directory `calendars/`")
+        os.makedirs("calendars", exist_ok=True)
+
+        # Write the events list as yaml files into the calendars directory
+        daily_name = "cape-town-daily"
+        print(f"Writing events to `calendars/{daily_name}.yaml`")
+        pprint(daily)
+        with open(f"calendars/{daily_name}.yaml", "w") as file:
+            yaml.dump({"events": daily}, file)
+        # Write the events list as yaml files into the calendars directory
+        hourly_name = "cape-town-hourly"
+        print(f"Writing events to `calendars/{hourly_name}.yaml`")
+        pprint(hourly)
+        with open(f"calendars/{hourly_name}.yaml", "w") as file:
+            yaml.dump({"events": hourly}, file)
+
     else:
         print("Failed to get weather data")
-
-    # Create a directory to contain our calendars
-    print("Creating directory `calendars/`")
-    os.makedirs("calendars", exist_ok=True)
-
-    # Write the events list as yaml files into the calendars directory
-    daily_name = "cape-town-daily"
-    print(f"Writing events to `calendars/{daily_name}.yaml`")
-    pprint(daily)
-    with open(f"calendars/{daily_name}.yaml", "w") as file:
-        yaml.dump({"events": daily}, file)
-    # Write the events list as yaml files into the calendars directory
-    hourly_name = "cape-town-hourly"
-    print(f"Writing events to `calendars/{hourly_name}.yaml`")
-    pprint(hourly)
-    with open(f"calendars/{hourly_name}.yaml", "w") as file:
-        yaml.dump({"events": hourly}, file)
-
     print(f"Python script finished")
 
 
