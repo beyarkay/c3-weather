@@ -12,20 +12,12 @@ on:
   schedule:
     - cron: '0 */3 * * *'
 
+# These permissions are required for the action to run
 permissions:
   actions: write
+  issues: write
   checks: write
   contents: write
-  issues: write
-  deployments: none
-  id-token: none
-  discussions: none
-  packages: none
-  pages: none
-  pull-requests: none
-  repository-projects: none
-  security-events: none
-  statuses: none
 
 jobs:
   create-calendars:
