@@ -10,7 +10,7 @@ on:
       - 'create-calendars.py'
   workflow_dispatch:
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: '0 9 * * *'
 
 # These permissions are required for the action to run
 permissions:
